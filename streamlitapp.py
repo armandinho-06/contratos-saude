@@ -10,11 +10,12 @@ SHEET_ID = '1pGnxZ2GCc5Bw4rBbjujUKt62IVBcrviqjxzGXDr3Ggg'
 URL = f'https://docs.google.com/spreadsheets/d/{SHEET_ID}/export?format=csv'
 def carregar_dados():
     try:
-        # dtype=str garante que o CPF não vire um número estranho
         df = pd.read_csv(URL, dtype=str)
+        # Remove espaços em branco antes ou depois de QUALQUER texto na planilha
+        df = df.apply(lambda x: x.str.strip() if x.dtype == "object" else x)
         return df
     except Exception as e:
-        st.error("Erro ao acessar a planilha. Verifique se o compartilhamento está como 'Qualquer pessoa com o link'.")
+        st.error(f"Erro ao acessar a planilha: {e}")
         return None
 
 st.title("🏥 Acompanhamento de Contrato")
@@ -26,6 +27,14 @@ nasc_input = st.text_input("Digite sua Data de Nascimento (DD/MM/AAAA):")
 
 if st.button("Consultar Status"):
     df = carregar_dados()
+    
+    if df is not None:
+        # .strip() remove espaços que o cliente pode ter digitado sem querer
+        cpf_limpo = cpf_input.strip()
+        nasc_limpa = nasc_input.strip()
+        
+        cliente = df[(df['cpf'] == cpf_limpo) & (df['nascimento'] == nasc_limpa)]
+        # ... resto do código
     
     if df is not None:
         # O filtro agora procura exatamente o que o cliente digitou
