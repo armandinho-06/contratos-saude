@@ -6,8 +6,8 @@ st.set_page_config(page_title="Portal do Cliente - Saúde", page_icon="🏥")
 
 # SEU ID REAL DA PLANILHA
 SHEET_ID = '1pGnxZ2GCc5Bw4rBbjujUKt62IVBcrviqjxzGXDr3Ggg'
-URL = f'https://docs.google.com/spreadsheets/d/1pGnxZ2GCc5Bw4rBbjujUKt62IVBcrviqjxzGXDr3Ggg/edit?usp=sharing'
-
+# O link abaixo é o segredo para transformar a planilha em dados que o Python entende
+URL = f'https://docs.google.com/spreadsheets/d/{SHEET_ID}/export?format=csv'
 def carregar_dados():
     try:
         # dtype=str garante que o CPF não vire um número estranho
