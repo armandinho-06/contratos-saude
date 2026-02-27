@@ -9,7 +9,7 @@ st.subheader("Consulte o status do seu plano de saúde")
 
 # Link da sua planilha (Versão de exportação CSV para facilitar o Pandas)
 # Substitua 'ID_DA_SUA_PLANILHA' pelo código longo que aparece na URL da sua planilha
-SHEET_ID = 'ID_DA_SUA_PLANILHA'
+SHEET_ID = '1pGnxZ2GCc5Bw4rBbjujUKt62IVBcrviqjxzGXDr3Ggg'
 URL = f'https://docs.google.com/spreadsheets/d/1pGnxZ2GCc5Bw4rBbjujUKt62IVBcrviqjxzGXDr3Ggg/edit?usp=sharing'
 
 # Função para carregar dados
