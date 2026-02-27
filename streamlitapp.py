@@ -14,7 +14,11 @@ URL = f'https://docs.google.com/spreadsheets/d/1pGnxZ2GCc5Bw4rBbjujUKt62IVBcrviq
 
 # Função para carregar dados
 def carregar_dados():
-    return pd.read_csv(URL)
+    try:
+        return pd.read_csv(URL)
+    except Exception as e:
+        st.error("Não foi possível conectar à planilha. Verifique se ela está compartilhada como 'Qualquer pessoa com o link'.")
+        return None
 
 # Interface de Login
 with st.container():
@@ -42,6 +46,8 @@ with st.container():
                 st.warning(f"Status Atual: {status}")
         else:
             st.error("Usuário não encontrado. Verifique os dados digitados.")
+
+            
 
 st.markdown("---")
 st.caption("Dúvidas? Entre em contato com nosso suporte via WhatsApp.")
